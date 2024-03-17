@@ -44,7 +44,7 @@ def user_input(user_question):
 st.set_page_config("DIAT Rakshak")
 st.header("DIAT Assistant Chatbot")
 GOOGLE_API_KEY = st.text_input("Please enter your GOOGLE_API_KEY")
-genai.configure(api_key=GOOGLE_API_KEY)
+os.environ['GOOGLE_API_KEY'] = GOOGLE_API_KEY
 		
 user_question = st.text_input("Hello! I am Rakshak, your DIAT assistant. Please ask your query regarding DIAT.")
 
