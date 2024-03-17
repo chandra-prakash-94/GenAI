@@ -16,26 +16,26 @@ from dotenv import load_dotenv
 
 
 
-def get_pdf_text(pdf_docs):
-    text=""
-    for pdf in pdf_docs:
-        pdf_reader= PdfReader(pdf)
-        for page in pdf_reader.pages:
-            text+= page.extract_text()
-    return  text
+# def get_pdf_text(pdf_docs):
+    # text=""
+    # for pdf in pdf_docs:
+        # pdf_reader= PdfReader(pdf)
+        # for page in pdf_reader.pages:
+            # text+= page.extract_text()
+    # return  text
 
 
 
-def get_text_chunks(text):
-    text_splitter = RecursiveCharacterTextSplitter(chunk_size=10000, chunk_overlap=1000)
-    chunks = text_splitter.split_text(text)
-    return chunks
+# def get_text_chunks(text):
+    # text_splitter = RecursiveCharacterTextSplitter(chunk_size=10000, chunk_overlap=1000)
+    # chunks = text_splitter.split_text(text)
+    # return chunks
 
 
-def get_vector_store(text_chunks):
-    embeddings = GoogleGenerativeAIEmbeddings(model = "models/embedding-001")
-    vector_store = FAISS.from_texts(text_chunks, embedding=embeddings)
-    vector_store.save_local("faiss_index")
+# def get_vector_store(text_chunks):
+    # embeddings = GoogleGenerativeAIEmbeddings(model = "models/embedding-001")
+    # vector_store = FAISS.from_texts(text_chunks, embedding=embeddings)
+    # vector_store.save_local("faiss_index")
 
 
 def get_conversational_chain():
@@ -78,17 +78,17 @@ def user_input(user_question):
 
 
 
-def main():
-    st.set_page_config("DIAT Rakshak")
-    st.header("DIAT Assistant ChatbotÅ")
-	GOOGLE_API_KEY = st.text_input("Please enter your GOOGLE_API_KEY")
-	genai.configure(api_key=GOOGLE_API_KEY)
-	
-	
-    user_question = st.text_input("Hello! I am Rakshak, your DIAT assistant. Please ask your query regarding DIAT.")
 
-    if user_question:
-        user_input(user_question)
+st.set_page_config("DIAT Rakshak")
+st.header("DIAT Assistant ChatbotÅ")
+GOOGLE_API_KEY = st.text_input("Please enter your GOOGLE_API_KEY")
+genai.configure(api_key=GOOGLE_API_KEY)
+	
+	
+user_question = st.text_input("Hello! I am Rakshak, your DIAT assistant. Please ask your query regarding DIAT.")
+
+if user_question:
+    user_input(user_question)
 
     # with st.sidebar:
         # st.title("Menu:")
@@ -101,5 +101,3 @@ def main():
                 # st.success("Done")
 
 
-if __name__ == "__main__":
-    main()
